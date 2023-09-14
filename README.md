@@ -23,7 +23,7 @@
 | user       | references | null: false, foreign_key: true |
 | title      | string     | null: false                    |
 | catch_copy | text       | null: false                    |
-|concept     |            |                                |
+| concept    | text       | null: false                    |
 
 ### Association
 
@@ -34,7 +34,7 @@
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
-| content  | text       |                                |
+| content  | text       | null: false                    |
 | prototype| references | null: false, foreign_key: true |
 | user     | references | null: false, foreign_key: true |
 
