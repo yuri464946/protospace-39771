@@ -1,4 +1,7 @@
 class PrototypesController < ApplicationController
+  before_action :require_login, only: [:new,:edit,:destroy]
+  before_action :user_confirm, only: [:edit]
+
   def index
     @prototypes = Prototype.all
   end
@@ -49,16 +52,16 @@ class PrototypesController < ApplicationController
     params.require(:prototype).permit(:content, :image, :title,:catch_copy,:concept).merge(user_id: current_user.id)
   end
 
-  def move_to_index
+  def require_login
     unless user_signed_in?
-      redirect_to action: :index
+      redirect_to  action: :index
     end
+  end
 
-
-
-
-
-
-
-  
+  def user_confirm
+    @prototype = Prototype.find(params[:id])
+    unless current_user.id == @prototype.user_id
+      redirect_to  action: :index
+    end
+  end
 end
